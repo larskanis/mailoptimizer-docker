@@ -38,6 +38,12 @@ mopw\n\
 \n\
 " | bash /mo-installer/Setup_MO.sh -c
 
+
+RUN service mysql start && \
+    echo "\
+      UPDATE mo.anwendungskonfiguration SET wert='DE' WHERE schluessel='user.str.conf.language'; \
+    " | mysql -h localhost
+
 RUN gem sources -a http://ccgems && \
     gem inst mailoptimizer_server
 
