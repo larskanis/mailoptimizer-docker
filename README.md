@@ -12,7 +12,7 @@ docker run -it --rm -p 2511:2511 -p 8765:8765 -v mailoptimizer-kunden:/opt/mailo
 docker run -p 2511:2511 -p 8765:8765 -v mailoptimizer-kunden:/opt/mailoptimizer/Kunden -v mailoptimizer-mysql:/var/lib/mysql -d --restart unless-stopped --memory-swappiness=0 mailoptimizer
 
 ## save image to file
-docker save mailoptimizer | xz -T `nproc` --fast > ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz
+docker save mailoptimizer | xz -T $(nproc) --fast > ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz
 
 ## load image from file
 xz -d < ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz | docker load
