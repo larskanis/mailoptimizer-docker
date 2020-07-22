@@ -1,5 +1,7 @@
 # Mailoptimizer in a docker image
 
+Twiki: http://twiki/Comcard/MailOptimizer
+
 ## Build per Dockerfile
 ```sh
 cp ~/I/PROG/_post/Mailoptimizer/MO_Installer.exe .
