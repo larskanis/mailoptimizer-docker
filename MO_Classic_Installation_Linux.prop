@@ -1,0 +1,107 @@
+#######################################################################
+# Konfigurationsdatei für die Konsoleninstallation des Mailoptimizers #
+#######################################################################
+#
+# Hinweise:
+# 1. Entfernen Sie die "#" vor den für Sie zutreffenden Zeilen
+# 2. Ersetzen Sie Werte in <> mit den für Sie zutreffenden Werten, z.b. <Hostname> durch localhost
+# 3. Bei Pfadangaben bitte : und \ ein \ voranstellen, also \: bzw. \\ wie in  C\:\\Users\\Administrator\\Desktop\\Mo_config_10000.xml
+
+### Sprachauswahl ###
+#
+# Erlaubte Werte:
+# Deutsch
+# sys.languageId=de
+# Englisch
+# sys.languageId=en
+
+### Produkt ###
+# Welches Mailoptimizer-Produkt soll installiert oder aktualisiert werden?
+#
+# Mailoptimizer Classic
+# mailoptimizer.produkt=0
+
+### Installationsverzeichnis ###
+# Linux
+# sys.installationDir=/opt/mailoptimizer
+
+### Konfiguration der Datenbank###
+#
+##Datenbank-Typ##
+#
+# Alte Konfiguration übernehmen. Dies ist bei Updates der Standard.
+# mailoptimizer.datenbank.typ=0
+#
+# Microsoft SQL Server
+# mailoptimizer.datenbank.typ=1
+# mailoptimizer.datenbank.url=jdbc\:sqlserver\://<Hostname>;databaseName\=mo
+#
+# Microsoft SQL Server Express
+# mailoptimizer.datenbank.typ=2
+# mailoptimizer.datenbank.url=jdbc\:sqlserver\://<Hostname>\\SQLEXPRESS;databaseName\=mo
+#
+# Oracle
+# mailoptimizer.datenbank.typ=3
+# mailoptimizer.datenbank.url=jdbc\:oracle\:thin\:@<Hostname>\:1521\:mo
+#
+# Oracle XE
+# mailoptimizer.datenbank.typ=4
+# mailoptimizer.datenbank.url=jdbc\:oracle\:thin\:@<Hostname>\:1521\:XE
+#
+# MySQL
+# mailoptimizer.datenbank.typ=5
+# mailoptimizer.datenbank.url=jdbc\:mysql\://<Hostname>\:3306/mo?useSSL\=false&serverTimezone\=CET
+#
+##Zugangsdaten##
+# mailoptimizer.datenbank.user=mo
+# mailoptimizer.datenbank.passwort=anfang
+#
+##Verschlüsselung der Zugangsdaten
+# mailoptimizer.datenbank.encrypt=true
+
+###Freischaltschlüsseldatei###
+# Pfad zur Freischaltschlüsseldatei
+# Linux
+# mailoptimizer.keyfile=/home/mo/Desktop/Mo_config_10000.xml
+
+###Simulation oder Produktion###
+# Soll das System im Simulationsmodus installiert werden? Erlaubte werte sind 'true' und 'false';
+# mailoptimizer.simulation=false
+
+###Start nach der Installation###
+# Soll der Mailoptimizer nach der Installation gestartet werden?
+# mailoptimizer.executeLauncher=true
+
+### (optional) Port für Tomcat###
+# Auf welchem Port soll der Tomcat erreichbar sein? (Voreinstellung 2511)
+# mailoptimizer.tomcatport=2511
+#
+# Zu welchem Port soll zu/vom Tomcat weitergeleitet werden? (Voreinstellung 80)
+# mailoptimizer.tomcatport.fwd =80
+
+### (optional) Nutzer und Gruppe für Installation ###
+# Für welchen Benutzer und welche Gruppe soll Mailoptimizer installiert werden? (Voreinstellung mailoptimizer)
+# mailoptimizer.linux.user =mailoptimizer
+# mailoptimizer.linux.group=mailoptimizer
+
+#Beispielwerte
+#sys.languageId=de
+#mailoptimizer.keyfile=/home/mo/Desktop/Mo_config_10000-Classic 4.3.xml
+#mailoptimizer.datenbank.typ=5
+#mailoptimizer.datenbank.user=mo
+#mailoptimizer.datenbank.passwort=anfang
+#mailoptimizer.datenbank.url=jdbc\:mysql\://modebian\:3306/mo?useSSL\=false&serverTimezone\=CET
+#mailoptimizer.datenbank.encrypt=false
+#mailoptimizer.simulation=false
+#mailoptimizer.produkt=0
+
+sys.languageId=de
+mailoptimizer.keyfile=/mo-installer/2022-02-23_Mo_config_15420_5046577760.xml
+#mailoptimizer.keyfile=/home/local/COMCARD-NT/kanis/comcard/Poop/mailoptimizer-docker/2022-02-23_Mo_config_15420_5046577760.xml
+mailoptimizer.datenbank.typ=5
+mailoptimizer.datenbank.user=mo
+mailoptimizer.datenbank.passwort=mopw
+mailoptimizer.datenbank.url=jdbc:mysql://localhost:3306/mo?useSSL\=false&serverTimezone\=CET
+mailoptimizer.datenbank.encrypt=false
+mailoptimizer.simulation=true
+mailoptimizer.produkt=0

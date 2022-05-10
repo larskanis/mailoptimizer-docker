@@ -2,22 +2,23 @@
 
 Twiki: http://twiki/Comcard/MailOptimizer
 
-## Build per Dockerfile
+## Build and run
 ```sh
-cp ~/I/PROG/_post/Mailoptimizer/MO_Installer.exe .
-wine MO_Installer.exe
-docker build . --build-arg http_proxy --build-arg https_proxy --tag mailoptimizer
+cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2022-03-21.zip .
+rm -rf mo-installer
+mkdir -p mo-installer
+unzip -d mo-installer MO_Installer-2022-03-21.zip
+docker-compose up
 ```
 
-## Run in foreground per:
+## Run as daemon per
 ```sh
-docker run -it --rm -p 2511:2511 -p 8765:8765 -v mailoptimizer-kunden:/opt/mailoptimizer/Kunden -v mailoptimizer-mysql:/var/lib/mysql mailoptimizer
+docker-compose up -d
 ```
 
-## Run as daemon per:
-```sh
-docker run -p 2511:2511 -p 8765:8765 -v mailoptimizer-kunden:/opt/mailoptimizer/Kunden -v mailoptimizer-mysql:/var/lib/mysql -d --restart unless-stopped --memory-swappiness=0 mailoptimizer
-```
+## Open browser interface
+
+http://localhost:2511/mowebapp/
 
 ## save image to file
 ```sh

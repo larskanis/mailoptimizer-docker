@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mysql:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+    command: --lower_case_table_names=1
+    volumes:
+      - mailoptimizer-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 60s
+
+  mailoptimizer:
+    build:
+      context: .
+      args:
+        - http_proxy
+        - https_proxy
+    restart: always
+    links:
+      - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - 2512:2511
+      - 8766:8765
+    volumes:
+      - mailoptimizer:/opt/mailoptimizer
+    cap_add:
+      - NET_ADMIN
+
+volumes:
+  mailoptimizer:
+  mailoptimizer-db:
