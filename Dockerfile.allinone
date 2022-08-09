@@ -67,10 +67,10 @@ RUN service mariadb start && \
     sleep 40 && \
     /bin/bash /opt/mailoptimizer/Software/Tomcat/bin/shutdown.sh
 
-COPY comcard-proxy-2019.crt /
-RUN keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/cacerts.jks -file /comcard-proxy-2019.crt -storepass changeit -alias comcard-2019 -no-prompt
-RUN keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -file /comcard-proxy-2019.crt -storepass changeit -alias comcard-2019 -no-prompt
-RUN keytool -importcert -trustcacerts -cacerts -file /comcard-proxy-2019.crt -storepass changeit -alias comcard-2019 -no-prompt
+COPY comcard-proxy-2022.crt /
+RUN keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/cacerts.jks -file /comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
+RUN keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -file /comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
+RUN keytool -importcert -trustcacerts -cacerts -file /comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
 
 # Zum testen von pre-release Gems:
 COPY mailoptimizer_server-*.gem /
