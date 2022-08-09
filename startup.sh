@@ -32,8 +32,11 @@ mo\n\
 mopw\n\
 1\n\
 \n\
+1\n\
+/\n\
+y\n\
 \n\
-" | bash /mo-installer/Setup_MO_x32_x64.sh -c -Dinstall4j.keepLog=true -Dinstall4j.debug=true -Dinstall4j.alternativeLogfile=/mo-unattended.log
+" | bash /mo-installer/Setup_MO_x32_x64.sh -c -Dinstall4j.keepLog=true -Dinstall4j.debug=false -Dinstall4j.alternativeLogfile=/mo-unattended.log || (cat /mo-unattended.log; false)
 
 iptables -D OUTPUT -p tcp --destination-port 443 -j REJECT
 

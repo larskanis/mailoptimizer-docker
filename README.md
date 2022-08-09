@@ -4,12 +4,12 @@ Twiki: http://twiki/Comcard/MailOptimizer
 
 ## Build and run
 ```sh
-cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2022-03-21.zip .
+cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2022-08-09.zip .
 rm -rf mo-installer
 mkdir -p mo-installer
-unzip -d mo-installer MO_Installer-2022-03-21.zip
-rm MO_Installer-2022-03-21.zip
-docker-compose up
+unzip -d mo-installer MO_Installer-2022-08-09.zip
+rm MO_Installer-2022-08-09.zip
+docker-compose up --build
 ```
 
 ## Run as daemon per
