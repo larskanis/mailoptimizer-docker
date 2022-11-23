@@ -11,7 +11,8 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 1s
-      timeout: 60s
+      timeout: 2s
+      retries: 60
 
   mailoptimizer:
     build:
