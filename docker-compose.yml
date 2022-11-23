@@ -27,8 +27,8 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - 2512:2511
-      - 8766:8765
+      - 2511:2511
+      - 8765:8765
     volumes:
       - mailoptimizer:/opt/mailoptimizer
     cap_add:
