@@ -30,3 +30,8 @@ docker save mailoptimizer | xz -T $(nproc) --fast > ~/I/PROG/_post/Mailoptimizer
 ```sh
 xz -d < ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz | docker load
 ```
+
+## Inspect the MYSQL database
+```sh
+docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
+```
