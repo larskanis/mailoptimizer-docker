@@ -35,3 +35,8 @@ xz -d < ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz | docker load
 ```sh
 docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
 ```
+
+Passwortänderung weit in die Zukunft schieben:
+```sh
+docker exec -it mailoptimizer-docker_mysql_1 /bin/mysql mo --execute "update benutzer set PW_GEAENDERT='2054-01-12 12:16:38';"
+```
