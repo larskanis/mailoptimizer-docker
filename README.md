@@ -9,6 +9,7 @@ rm -rf mo-installer
 mkdir -p mo-installer
 unzip -d mo-installer MO_Installer-2022-11-23.zip
 rm MO_Installer-2022-11-23.zip
+gem fetch mailoptimizer_server
 docker-compose up --build
 ```
 
