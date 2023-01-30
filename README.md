@@ -24,12 +24,14 @@ http://localhost:2511/mowebapp/
 
 ## save image to file
 ```sh
-docker save mailoptimizer | xz -T $(nproc) --fast > ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz
+docker save mailoptimizer-docker_mailoptimizer | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz
+docker save mariadb:10.6 | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mysql.tar.xz
 ```
 
 ## load image from file
 ```sh
-xz -d < ~/I/PROG/_post/Mailoptimizer/mailoptimizer-docker.tar.xz | docker load
+xz -d < /production/data/cpp/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz
+xz -d < /production/data/cpp/HSB-IN/Dev/post/mysql.tar.xz | docker load
 ```
 
 ## Inspect the MYSQL database

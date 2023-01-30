@@ -15,6 +15,7 @@ services:
       retries: 60
 
   mailoptimizer:
+    image: mailoptimizer-docker_mailoptimizer
     build:
       context: .
       args:
