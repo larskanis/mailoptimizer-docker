@@ -14,9 +14,10 @@ gem fetch mailoptimizer_server
 docker-compose up --build
 ```
 
-## Run as daemon per
+## Run as daemon and view the logs
 ```sh
 docker-compose up -d
+docker-compose logs -f
 ```
 
 ## Open browser interface
@@ -30,9 +31,19 @@ docker save mariadb:10.6 | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mysql.tar
 ```
 
 ## load image from file
+
+On comdb2 in the mailoptimizer-docker root directory:
 ```sh
-xz -d < /production/data/cpp/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz
+xz -d < ~/L/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz | docker load
+xz -d < ~/L/HSB-IN/Dev/post/mysql.tar.xz | docker load
+docker-compose up -d
+```
+
+On cppdb1 in the mailoptimizer-docker root directory:
+```sh
+xz -d < /production/data/cpp/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz | docker load
 xz -d < /production/data/cpp/HSB-IN/Dev/post/mysql.tar.xz | docker load
+docker-compose up -d
 ```
 
 ## Inspect the MYSQL database
