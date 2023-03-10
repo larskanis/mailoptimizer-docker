@@ -2,13 +2,14 @@
 
 Twiki: http://twiki/Comcard/MailOptimizer
 
+
 ## Build and run
 ```sh
-cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2022-11-23.zip .
+cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip .
 rm -rf mo-installer
 mkdir -p mo-installer
-unzip -d mo-installer MO_Installer-2022-11-23.zip
-rm MO_Installer-2022-11-23.zip
+unzip -d mo-installer MO_Installer-2023-03-10.zip
+rm MO_Installer-2023-03-10.zip
 gem fetch mailoptimizer_server
 docker-compose up --build
 ```
@@ -43,3 +44,13 @@ Passwortänderung weit in die Zukunft schieben:
 ```sh
 docker exec -it mailoptimizer-docker_mysql_1 /bin/mysql mo --execute "update benutzer set PW_GEAENDERT='2054-01-12 12:16:38';"
 ```
+
+## Update to new version of Mailoptimizer
+
+```sh
+wget https://www.tc.dpcom.de/downloads/_AutoUpdate_Mailoptimizer/MO_Installer.zip
+cp MO_Installer.zip ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip
+rm MO_Installer.zip
+```
+
+Then update the date stamps of the zip file in this README and run commands above to build and start a new docker image.
