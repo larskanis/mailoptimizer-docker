@@ -64,14 +64,14 @@ Auf cppdb1:
 
 Aus letzten Popwin-Aufbereitungen die Abrechnungsnummer für Inland und Ausland bestimmen. Hier z.B. bei eGK:
 
-```sh
-$  psql Produktion
-Produktion=> SELECT MAX(id), MAX(created_at), dv_abrnr, dv_einlieferer, dv_porto, dv_filename FROM egk_perso.cards WHERE  opb_ktr~'EWE' GROUP BY dv_abrnr, dv_einlieferer, dv_porto, dv_filename  ORDER BY MAX(id) DESC LIMIT 20;
-``
-Dann die jew. höchste Nummer aus Spalte `dv_abrnr` nehmen und in Mailoptimizer als `LETZTEBLATTNR` eintragen:
+```sql
+$ psql Produktion
+Produktion=> SELECT MAX(opb_ktr), SUBSTRING(dv_filename,8,1) AS filetype, ('x'|| SUBSTRING(dv_dm_ascii,(6-1)*2+1,5*2))::bit(40)::bigint AS ekp, ('x'|| SUBSTRING(dv_dm_ascii,(20-1)*2+1,2))::bit(8)::int AS teiln, 'UPDATE KONTRAKT SET LETZTEBLATTNR=' || MAX(dv_abrnr) || ' WHERE KONTRAKTNUMMER=''' || ('x'|| SUBSTRING(dv_dm_ascii,(6-1)*2+1,5*2))::bit(40)::bigint || ''' AND VERFAHREN=''' || case SUBSTRING(dv_filename,8,1) when 's' then '50' when 'p' then '10' end || ''' AND TEILNAHME=''' || to_char(('x'|| SUBSTRING(dv_dm_ascii,(20-1)*2+1,2))::bit(8)::int, 'fm00') || ''';' AS update FROM egk_perso.cards WHERE poop_batch_id IS NOT NULL AND dv_dm_ascii IS NOT NULL GROUP BY dv_einlieferer, filetype, ekp, teiln  ORDER BY ekp, MAX(id) DESC;
+```
+Dann das Update-Statement nehmen und in Mailoptimizer als `LETZTEBLATTNR` eintragen:
 
-```sh
-docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
+```sql
+$ docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
 MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0888 WHERE KONTRAKTNUMMER='5045271907' AND VERFAHREN='10' AND TEILNAHME='02';
 
 MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0025 WHERE KONTRAKTNUMMER='5045271907' AND VERFAHREN='50' AND TEILNAHME='01';
