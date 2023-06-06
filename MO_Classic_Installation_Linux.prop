@@ -101,7 +101,7 @@ mailoptimizer.keyfile=/mo-installer/2022-02-23_Mo_config_15420_5046577760.xml
 mailoptimizer.datenbank.typ=5
 mailoptimizer.datenbank.user=mo
 mailoptimizer.datenbank.passwort=mopw
-mailoptimizer.datenbank.url=jdbc:mysql://localhost:3306/mo?useSSL\=false&serverTimezone\=CET
+mailoptimizer.datenbank.url=jdbc:mysql://mysql:3306/mo?useSSL=false&serverTimezone=CET
 mailoptimizer.datenbank.encrypt=false
 mailoptimizer.simulation=true
 mailoptimizer.produkt=0

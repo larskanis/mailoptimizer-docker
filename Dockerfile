@@ -12,6 +12,7 @@ COPY ["2022-02-23_Mo_config_15420_5046577760.xml", "/mo-installer/"]
 # RUN sed -i 's/MySQL 5.7/\*/g' /mo-installer/Setup/morequirements.xml
 
 COPY comcard-proxy-2022.crt /
+COPY MO_Classic_Installation_Linux.prop /mo-installer/
 
 # Zum testen von pre-release Gems:
 # COPY mailoptimizer_server-*.gem /
