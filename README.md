@@ -1,9 +1,13 @@
 # Mailoptimizer in a docker image
 
+Post: https://www.deutschepost.de/de/m/mailoptimizer.html
 Twiki: http://twiki/Comcard/MailOptimizer
 
 
 ## Build and run
+
+Change `~/I/PROG/_post/Mailoptimizer/` to your path to MO_Installer and Licence file.
+
 ```sh
 cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip .
 cp ~/I/PROG/_post/Mailoptimizer/2022-02-23_Mo_config_15420_5046577760.xml .
@@ -39,6 +43,8 @@ xz -d < ~/L/HSB-IN/Dev/post/mysql.tar.xz | docker load
 docker-compose up -d
 mailoptimizer_client --server-version
 ```
+Now check out http://comopt1
+
 
 On cppdb1 in the mailoptimizer-docker root directory:
 ```sh
@@ -47,6 +53,8 @@ xz -d < /production/data/cpp/HSB-IN/Dev/post/mysql.tar.xz | docker load
 docker-compose up -d
 mailoptimizer_client --server-version
 ```
+Now check out http://cppopt1
+
 
 ## Inspect the MYSQL database
 ```sh
