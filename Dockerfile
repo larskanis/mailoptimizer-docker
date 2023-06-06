@@ -4,14 +4,16 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y && \
     apt-get install -y openjdk-11-jre-headless ruby ranger mariadb-client iptables
 
-
+# Installer und Lizenzdatei ins Image holen
 COPY mo-installer /mo-installer
 COPY ["2022-02-23_Mo_config_15420_5046577760.xml", "/mo-installer/"]
 
-
+# Falls die erwartete MySQL-Version nicht mit der installierten überein stimmt:
 # RUN sed -i 's/MySQL 5.7/\*/g' /mo-installer/Setup/morequirements.xml
 
+# Firmeninternes SSL-Zertifikat holen
 COPY comcard-proxy-2022.crt /
+# Property-Datei für Installer holen (wird aktuell nicht genutzt)
 COPY MO_Classic_Installation_Linux.prop /mo-installer/
 
 # Zum testen von pre-release Gems:
