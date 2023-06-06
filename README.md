@@ -6,6 +6,7 @@ Twiki: http://twiki/Comcard/MailOptimizer
 ## Build and run
 ```sh
 cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip .
+cp ~/I/PROG/_post/Mailoptimizer/2022-02-23_Mo_config_15420_5046577760.xml .
 rm -rf mo-installer
 mkdir -p mo-installer
 unzip -d mo-installer MO_Installer-2023-03-10.zip
