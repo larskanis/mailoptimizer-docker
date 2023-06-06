@@ -11,8 +11,7 @@ rm -rf mo-installer
 mkdir -p mo-installer
 unzip -d mo-installer MO_Installer-2023-03-10.zip
 rm MO_Installer-2023-03-10.zip
-gem fetch mailoptimizer_server
-docker-compose up --build
+WITH_CCRPC=1 docker-compose up --build
 ```
 
 ## Run as daemon and view the logs

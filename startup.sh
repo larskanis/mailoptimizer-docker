@@ -63,4 +63,8 @@ keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/c
 
 # Tomcat und mailoptimizer_server starten
 /bin/bash /opt/mailoptimizer/Software/Tomcat/bin/startup.sh && \
-  mailoptimizer_server -s tcpserver://0.0.0.0 -v -d /opt/mailoptimizer/Kunden/15420
+    if [ -z "$WITH_CCRPC" ] ; then \
+        sleep infinity ; \
+    else \
+        mailoptimizer_server -s tcpserver://0.0.0.0 -v -d /opt/mailoptimizer/Kunden/15420 ; \
+    fi

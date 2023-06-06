@@ -16,11 +16,19 @@ COPY comcard-proxy-2022.crt /
 # Property-Datei für Installer holen (wird aktuell nicht genutzt)
 COPY MO_Classic_Installation_Linux.prop /mo-installer/
 
+ARG WITH_CCRPC
+ENV WITH_CCRPC=${WITH_CCRPC}
+
 # Zum testen von pre-release Gems:
 # COPY mailoptimizer_server-*.gem /
 
-RUN gem sources -a http://ccgems && \
-    gem inst --no-doc mailoptimizer_server --verbose
+# Eigenes Gem installieren für Up- und Download von Freimachungsdaten
+RUN if [ -z "$WITH_CCRPC" ] ; then \
+        echo ccrpc Interface deaktiviert! ; \
+    else \
+        gem sources -a http://ccgems && \
+        gem inst --no-doc mailoptimizer_server --verbose ; \
+    fi
 
 EXPOSE 2511/tcp
 EXPOSE 8765/tcp

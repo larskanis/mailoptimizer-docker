@@ -21,6 +21,7 @@ services:
       args:
         - http_proxy
         - https_proxy
+        - WITH_CCRPC
     restart: always
     links:
       - mysql
