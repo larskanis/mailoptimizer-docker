@@ -60,15 +60,17 @@ docker exec -it mailoptimizer-docker_mysql_1 /bin/mysql mo --execute "update ben
 
 ### Abrechnungsnummer bzw. Letzteblattnummer übernehmen
 
-Auf cppdb1:
+Auf comdb2 bzw. cppdb1 per SSH:
 
-Aus letzten Popwin-Aufbereitungen die Abrechnungsnummer für Inland und Ausland bestimmen. Hier z.B. bei eGK:
+Aus letzten Popwin-Aufbereitungen die Abrechnungsnummer für Inland und Ausland bestimmen.
+Dazu kann der letzte Einlieferungsbeleg verwendet werden oder man schaut in die jeweilige Datenbank nach der Abrechnungsnummer zu den Kontrakten.
+Hier z.B. bei eGK-Datenbank wird gleich das komplette UPDATE-Statement generiert:
 
 ```sql
 $ psql Produktion
 Produktion=> SELECT MAX(opb_ktr), SUBSTRING(dv_filename,8,1) AS filetype, ('x'|| SUBSTRING(dv_dm_ascii,(6-1)*2+1,5*2))::bit(40)::bigint AS ekp, ('x'|| SUBSTRING(dv_dm_ascii,(20-1)*2+1,2))::bit(8)::int AS teiln, 'UPDATE KONTRAKT SET LETZTEBLATTNR=' || MAX(dv_abrnr) || ' WHERE KONTRAKTNUMMER=''' || ('x'|| SUBSTRING(dv_dm_ascii,(6-1)*2+1,5*2))::bit(40)::bigint || ''' AND VERFAHREN=''' || case SUBSTRING(dv_filename,8,1) when 's' then '50' when 'p' then '10' end || ''' AND TEILNAHME=''' || to_char(('x'|| SUBSTRING(dv_dm_ascii,(20-1)*2+1,2))::bit(8)::int, 'fm00') || ''';' AS update FROM egk_perso.cards WHERE poop_batch_id IS NOT NULL AND dv_dm_ascii IS NOT NULL GROUP BY dv_versender, filetype, ekp, teiln  ORDER BY ekp, MAX(id) DESC;
 ```
-Dann das Update-Statement nehmen und in Mailoptimizer als `LETZTEBLATTNR` eintragen:
+Dann das Update-Statement nehmen oder wie folgt anpassen und in Mailoptimizer als `LETZTEBLATTNR` eintragen:
 
 ```sql
 $ docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
