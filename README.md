@@ -1,12 +1,26 @@
-# Mailoptimizer in a docker image
+# Mailoptimizer als Docker-Image
 
-Post: https://www.deutschepost.de/de/m/mailoptimizer.html
+Post: https://www.deutschepost.de/de/m/mailoptimizer.html<br>
 Twiki: http://twiki/Comcard/MailOptimizer
 
+Mailoptimizer lässt sich in einen Linux-Container packen und damit produktiv betreiben.
+Benötigt wird:
+- die MO_Installer ZIP-Datei (Download von https://www.tc.dpcom.de/downloads/_AutoUpdate_Mailoptimizer/MO_Installer.zip)
+- eine gültige Lizenzdatei der Art `Mo_config_*.xml`
 
-## Build and run
+Bereitgestellt wird:
+- Mailoptimizer Web-GUI: http://localhost:2511/mowebapp/
+- REST-API: http://localhost:2511/mobackend/restapi/signin
+- Proprietäre Dateiup- und Download-Schnittstelle über TCP port 8765 (wenn `WITH_CCRPC=1` bei docker-build angegeben wurde)
 
-Change `~/I/PROG/_post/Mailoptimizer/` to your path to MO_Installer and Licence file.
+Features:
+- Beachtung der Umgebungsvariablen `http_proxy` und `https_proxy`
+- Import eines Unternehmenszertifikats für SSL-Verbindungen
+- Spracheinstellung: Deutsch
+
+## Image bauen und starten
+
+Ggf. den Pfad `~/I/PROG/_post/Mailoptimizer/` zum MO_Installer und Lizenz Datei anpassen.
 
 ```sh
 cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip .
@@ -18,23 +32,26 @@ rm MO_Installer-2023-03-10.zip
 WITH_CCRPC=1 docker-compose up --build
 ```
 
-## Run as daemon and view the logs
+## Als Daemon starten und Logs anschauen
 ```sh
 docker-compose up -d
 docker-compose logs -f
 ```
 
-## Open browser interface
+## Browser Interface öffnen
 
 http://localhost:2511/mowebapp/
 
-## save image to file
+## Docker Images in Datei exportieren
+Das gebaute Docker-Image kann exportiert werden und auf einem beliebigen anderen Rechner geladen werden.
+Ebenso das MySQL-Image.
+
 ```sh
 docker save mailoptimizer-docker_mailoptimizer | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz
 docker save mariadb:10.6 | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mysql.tar.xz
 ```
 
-## load image from file
+## Docker Images aus Datei laden
 
 On comdb2 in the mailoptimizer-docker root directory:
 ```sh
@@ -56,7 +73,7 @@ mailoptimizer_client --server-version
 Now check out http://cppopt1
 
 
-## Inspect the MYSQL database
+## MYSQL Datenbank anschauen
 ```sh
 docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
 ```
@@ -82,20 +99,20 @@ Dann das Update-Statement nehmen oder wie folgt anpassen und in Mailoptimizer al
 
 ```sql
 $ docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
-MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0888 WHERE KONTRAKTNUMMER='5045271907' AND VERFAHREN='10' AND TEILNAHME='02';
+MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0888 WHERE KONTRAKTNUMMER='5012345678' AND VERFAHREN='10' AND TEILNAHME='02';
 
-MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0025 WHERE KONTRAKTNUMMER='5045271907' AND VERFAHREN='50' AND TEILNAHME='01';
+MariaDB [mo]> UPDATE KONTRAKT SET LETZTEBLATTNR=0025 WHERE KONTRAKTNUMMER='5012345678' AND VERFAHREN='50' AND TEILNAHME='01';
 
 MariaDB [mo]> select * from KONTRAKT WHERE NAME REGEXP 'EWE';
 +-------------+----------+----------------+-----------+-----------+---------+-------------+---------------+------------+-------------+
 | KONTRAKT_ID | KUNDE_ID | KONTRAKTNUMMER | VERFAHREN | TEILNAHME | NAME    | KONTRAKTTYP | LETZTEBLATTNR | ERSTELLTAM | BENUTZER_ID |
 +-------------+----------+----------------+-----------+-----------+---------+-------------+---------------+------------+-------------+
-|          40 |        1 |     5045271907 | 50        | 01        | BKK EWE | 2           |            25 | NULL       |        NULL |
-|         127 |        1 |     5045271907 | 10        | 02        | BKK EWE | 2           |           888 | NULL       |        NULL |
+|          70 |        1 |     5012345678 | 50        | 01        | BKK EWE | 2           |            25 | NULL       |        NULL |
+|         137 |        1 |     5012345678 | 10        | 02        | BKK EWE | 2           |           888 | NULL       |        NULL |
 +-------------+----------+----------------+-----------+-----------+---------+-------------+---------------+------------+-------------+
 ```
 
-## Update to new version of Mailoptimizer
+## Update der Mailoptimizer-Version
 
 ```sh
 wget https://www.tc.dpcom.de/downloads/_AutoUpdate_Mailoptimizer/MO_Installer.zip
@@ -103,4 +120,4 @@ cp MO_Installer.zip ~/I/PROG/_post/Mailoptimizer/MO_Installer-2023-03-10.zip
 rm MO_Installer.zip
 ```
 
-Then update the date stamps of the zip file in this README and run commands above to build and start a new docker image.
+Dann die Zeitstempel der ZIP-Datei in dieser README anpassen und die obigen Kommandos zum Bauen und Starten eines neuen Docker Images ausführen.
