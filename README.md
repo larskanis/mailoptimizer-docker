@@ -14,9 +14,16 @@ Bereitgestellt wird:
 - Proprietäre Dateiup- und Download-Schnittstelle über TCP port 8765 (wenn `WITH_CCRPC=1` bei docker-build angegeben wurde)
 
 Features:
+- Verwendet MariaDB als Datenbank
 - Beachtung der Umgebungsvariablen `http_proxy` und `https_proxy`
 - Import eines Unternehmenszertifikats für SSL-Verbindungen
 - Spracheinstellung: Deutsch
+- automatische Migration der verbundenen Datenbank und Dateien nach Update des Installers (siehe unten)
+
+Funktionsweise:
+
+Das Installationsverzeichnis `/opt/mailoptimizer/` wird als Volume behandelt und beim ersten Containerstart vom Installer befüllt.
+Bei allen weiteren Starts erkennt der Installer, dass bereits eine Mailoptimizer-Version installiert ist und führt nur bei eventuellem Update des Installers ein Update der Verzeichnisse und der MySQL-Datenbank durch.
 
 ## Image bauen und starten
 
@@ -121,3 +128,4 @@ rm MO_Installer.zip
 ```
 
 Dann die Zeitstempel der ZIP-Datei in dieser README anpassen und die obigen Kommandos zum Bauen und Starten eines neuen Docker Images ausführen.
+Beim ersten Start des Containers wird das bestehende Datenbank-Schema vom Installer automatisch auf die neue Version migriert.
