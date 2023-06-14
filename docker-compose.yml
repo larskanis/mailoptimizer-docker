@@ -35,6 +35,10 @@ services:
       - mailoptimizer:/opt/mailoptimizer
     cap_add:
       - NET_ADMIN
+    deploy:
+      resources:
+        limits:
+          memory: 2000M
 
 volumes:
   mailoptimizer:
