@@ -38,7 +38,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2000M
+          memory: 8000M
 
 volumes:
   mailoptimizer:
