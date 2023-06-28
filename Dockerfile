@@ -12,7 +12,10 @@ COPY ["2022-02-23_Mo_config_15420_5046577760.xml", "/mo-installer/"]
 # RUN sed -i 's/MySQL 5.7/\*/g' /mo-installer/Setup/morequirements.xml
 
 # Firmeninternes SSL-Zertifikat holen
-COPY comcard-proxy-2022.crt /
+COPY comcard-proxy-2022.crt /usr/local/share/ca-certificates/
+COPY sinc-root-02.crt /usr/local/share/ca-certificates/
+RUN chmod 0644 /usr/local/share/ca-certificates/*.crt && update-ca-certificates
+
 # Property-Datei für Installer holen (wird aktuell nicht genutzt)
 COPY MO_Classic_Installation_Linux.prop /mo-installer/
 
