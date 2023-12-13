@@ -54,14 +54,8 @@ echo "
 " | mysql -h mysql
 
 # Proxy-SSL-Zertifikat eintragen, damit Mailoptimizer für Listenupdates per HTTPS ins Internet kommt
-keytool -delete -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -storepass changeit -alias comcard-2022 || true
 keytool -delete -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -storepass changeit -alias sinc-root-02 || true
-# keytool -delete -keystore /opt/mailoptimizer/Software/Tomcat/conf/cacerts.jks -storepass changeit -alias comcard-2022
-keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -file /usr/local/share/ca-certificates/comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
 keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/MoTrustStore.jks -file /usr/local/share/ca-certificates/sinc-root-02.crt -storepass changeit -alias sinc-root-02 -no-prompt
-# die Beiden auch zur Sicherheit noch mit unserem Zertifikat impfen:
-# keytool -importcert -trustcacerts -keystore /opt/mailoptimizer/Software/Tomcat/conf/cacerts.jks -file /comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
-# keytool -importcert -trustcacerts -cacerts -file /comcard-proxy-2022.crt -storepass changeit -alias comcard-2022 -no-prompt
 
 # Tomcat und mailoptimizer_server starten
 /bin/bash /opt/mailoptimizer/Software/Tomcat/bin/startup.sh && \
