@@ -129,3 +129,13 @@ rm MO_Installer.zip
 
 Dann die Zeitstempel der ZIP-Datei in dieser README anpassen und die obigen Kommandos zum Bauen und Starten eines neuen Docker Images ausführen.
 Beim ersten Start des Containers wird das bestehende Datenbank-Schema vom Installer automatisch auf die neue Version migriert.
+
+Bei der Update-Installation auf einem bestehenden Volume mit Mailoptimizer-5.7 auf 5.8 werden andere Fragen gestellt, als bei einer frischen Installation.
+Deshalb funktioniert die Einrichtung in `startup.sh` nicht mehr und es kommt zu Fehlern.
+Als Workaround kann hier die Update-Installation einmal händisch durchgeführt werden mit folgendem Befehl:
+```sh
+docker-compose run --rm -it mailoptimizer bash /mo-installer/Setup_MO_x32_x64.sh -c
+```
+
+Dann müssen die Fragen per Hand beantwortet werden (meist mit Enter oder "1" für die default-Einstellung).
+Damit wird dann das Update ausgeführt und die weiteren Starts funktionieren anschließend wieder reibungslos.
