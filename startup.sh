@@ -29,7 +29,6 @@ echo -e "1\n\
 mailoptimizer\n\
 mailoptimizer\n\
 /\n\
-n\n\
 MySQL via JDBC\n\
 jdbc:mysql://mysql:3306/mo?useSSL=false&serverTimezone=CET\n\
 mo\n\

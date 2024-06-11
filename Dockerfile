@@ -1,8 +1,8 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y && \
-    apt-get install -y openjdk-11-jre-headless ruby ranger mariadb-client iptables
+    apt-get install -y openjdk-17-jre-headless ruby ranger mariadb-client iptables
 
 # Installer und Lizenzdatei ins Image holen
 COPY mo-installer /mo-installer
