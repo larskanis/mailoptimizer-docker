@@ -22,6 +22,7 @@ services:
         - http_proxy
         - https_proxy
         - WITH_CCRPC
+      network: host
     restart: always
     links:
       - mysql
