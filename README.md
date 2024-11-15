@@ -62,8 +62,8 @@ docker save mariadb:10.6 | xz -T $(nproc) --fast > ~/L/HSB-IN/Dev/post/mysql.tar
 
 On comdb2 in the mailoptimizer-docker root directory:
 ```sh
-xz -d < ~/L/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz | docker load
-xz -d < ~/L/HSB-IN/Dev/post/mysql.tar.xz | docker load
+smbclient -k //comlx5/vol5/ -c "get HSB-IN/Dev/post/mailoptimizer-docker.tar.xz -" | xz -d | docker load
+smbclient -k //comlx5/vol5/ -c "get HSB-IN/Dev/post/mysql.tar.xz -" | xz -d | docker load
 docker-compose up -d
 mailoptimizer_client --server-version
 ```
