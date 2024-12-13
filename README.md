@@ -134,8 +134,9 @@ Bei der Update-Installation auf einem bestehenden Volume mit Mailoptimizer-5.7 a
 Deshalb funktioniert die Einrichtung in `startup.sh` nicht mehr und es kommt zu Fehlern.
 Als Workaround kann hier die Update-Installation einmal händisch durchgeführt werden mit folgendem Befehl:
 ```sh
-docker-compose run --rm -it mailoptimizer bash /mo-installer/Setup_MO_x32_x64.sh -c
+docker compose run --rm -it mailoptimizer bash -c "iptables -A OUTPUT -p tcp --destination-port 443 -j REJECT && /mo-installer/Setup_MO_x32_x64.sh -c"
 ```
 
-Dann müssen die Fragen per Hand beantwortet werden (meist mit Enter oder "1" für die default-Einstellung).
+Dann müssen die Fragen per Hand beantwortet werden.
+Meist mit Enter oder "1" für die default-Einstellung beantworten und ansonsten in die Datei `startup.sh` für die richtigen Werte schauen.
 Damit wird dann das Update ausgeführt und die weiteren Starts funktionieren anschließend wieder reibungslos.
