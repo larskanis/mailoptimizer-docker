@@ -36,13 +36,13 @@ rm -rf mo-installer
 mkdir -p mo-installer
 unzip -d mo-installer MO_Installer-2024-12-12.zip
 rm MO_Installer-2024-12-12.zip
-WITH_CCRPC=1 docker-compose up --build
+WITH_CCRPC=1 docker compose up --build
 ```
 
 ## Als Daemon starten und Logs anschauen
 ```sh
-docker-compose up -d
-docker-compose logs -f
+docker compose up -d
+docker compose logs -f
 ```
 
 ## Browser Interface öffnen
@@ -64,7 +64,7 @@ On comdb2 in the mailoptimizer-docker root directory:
 ```sh
 smbclient -k //comlx5/vol5/ -c "get HSB-IN/Dev/post/mailoptimizer-docker.tar.xz -" | xz -d | docker load
 smbclient -k //comlx5/vol5/ -c "get HSB-IN/Dev/post/mysql.tar.xz -" | xz -d | docker load
-docker-compose up -d
+docker compose up -d
 mailoptimizer_client --server-version
 ```
 Now check out http://comopt1
@@ -74,7 +74,7 @@ On cppdb1 in the mailoptimizer-docker root directory:
 ```sh
 xz -d < /production/data/cpp/HSB-IN/Dev/post/mailoptimizer-docker.tar.xz | docker load
 xz -d < /production/data/cpp/HSB-IN/Dev/post/mysql.tar.xz | docker load
-docker-compose up -d
+docker compose up -d
 mailoptimizer_client --server-version
 ```
 Now check out http://cppopt1
