@@ -87,7 +87,12 @@ docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo
 
 Passwortänderung weit in die Zukunft schieben:
 ```sh
-docker exec -it mailoptimizer-docker_mysql_1 /bin/mysql mo --execute "update benutzer set PW_GEAENDERT='2054-01-12 12:16:38';"
+docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo --execute "update benutzer set PW_GEAENDERT='2054-01-12 12:16:38';"
+```
+
+Benutzer entsperren:
+```sh
+docker exec -it mailoptimizer-docker-mysql-1 /bin/mysql mo --execute "UPDATE benutzer SET gesperrt='', ANMELDEFEHLERANZ=0 WHERE kennung='ServerAdmin';"
 ```
 
 ### Abrechnungsnummer bzw. Letzteblattnummer übernehmen
