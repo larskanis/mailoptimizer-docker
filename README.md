@@ -30,12 +30,12 @@ Bei allen weiteren Starts erkennt der Installer, dass bereits eine Mailoptimizer
 Ggf. den Pfad `~/I/PROG/_post/Mailoptimizer/` zum MO_Installer und Lizenz Datei anpassen.
 
 ```sh
-cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2025-07-30.zip .
+cp ~/I/PROG/_post/Mailoptimizer/MO_Installer-2025-09-18.zip .
 cp ~/I/PROG/_post/Mailoptimizer/2022-02-23_Mo_config_15420_5046577760.xml .
 rm -rf mo-installer
 mkdir -p mo-installer
-unzip -d mo-installer MO_Installer-2025-07-30.zip
-rm MO_Installer-2025-07-30.zip
+unzip -d mo-installer MO_Installer-2025-09-18.zip
+rm MO_Installer-2025-09-18.zip
 WITH_CCRPC=1 docker compose up --build
 ```
 
@@ -128,7 +128,7 @@ MariaDB [mo]> select * from KONTRAKT WHERE NAME REGEXP 'EWE';
 
 ```sh
 wget https://www.tc.dpcom.de/downloads/_AutoUpdate_Mailoptimizer/MO_Installer.zip
-cp MO_Installer.zip ~/I/PROG/_post/Mailoptimizer/MO_Installer-2025-07-30.zip
+cp MO_Installer.zip ~/I/PROG/_post/Mailoptimizer/MO_Installer-2025-09-18.zip
 rm MO_Installer.zip
 ```
 
